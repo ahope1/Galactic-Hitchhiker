@@ -1,23 +1,28 @@
-m12 = $12
-m0213 = $0213
-ad = $AD
-ae = $AE
-e0 = $E0
-ec = $EC
-ee = $EE
-f0 = $F0
-f6 = $F6
-f7 = $F7
-f8 = $F8
-f9 = $F9
-fa = $FA
-fb = $FB
-fc = $FC
-fd = $FD
-fe = $FE
-ff = $FF
+ad = &E2
+ae = &E3
+e0 = &70
+ec = &7C
+ee = &7E
+f0 = &80
+f6 = &86
+f7 = &87
+f8 = &88
+f9 = &89
+fa = &8A
+fb = &8B
+fc = &8C
+fd = &8D
+fe = &8E
+ff = &8F
 
-ORG $239
+osnewl = &FFE7
+oswrch = &FFEE
+osword = &FFF1
+osbyte = &FFF4
+
+iascdec = &9EDF
+
+ORG $1300
 
 .start
 
@@ -108,7 +113,7 @@ ORG $239
              JSR L0366
              LDA #$00
              STA f9
-             JSR $A357   \ line input ?
+             JSR LA357   \ line input ?
   .L02F0     LDA #L0603 MOD 256
              STA f7
              LDA #L0603 DIV 256		 \ $0603: nouns start
@@ -123,7 +128,7 @@ ORG $239
              STA f8
              LDA #L0BD1 MOD 256    \ $0bd1 seems to be start of intro text
              STA f7
-             JSR $A86C   \ CR/LF routine which also 'hangs around' for any extra nulls that the system finds in OD ? 
+             JSR osnewl \ $A86C   \ CR/LF routine which also 'hangs around' for any extra nulls that the system finds in OD ? 
              NOP
              NOP
   .L030F     JSR L0395
@@ -131,17 +136,17 @@ ORG $239
              LDA fa
              CMP #$02
              BNE L031F
-             JSR $FD00   \ read keyboard ?
+             JSR LFD00   \ read keyboard ?
              LDX #$04
-  .L031F     JSR $A86C   \ CR/LF routine which also 'hangs around' for any extra nulls that the system finds in OD ? 
+  .L031F     JSR osnewl \ $A86C   \ CR/LF routine which also 'hangs around' for any extra nulls that the system finds in OD ? 
              DEX
              BPL L031F
              LDA fa
              CMP #$04
              BNE L030F
-             JSR $FD00   \ read keyboard ?
+             JSR LFD00   \ read keyboard ?
              LDX #$02
-  .L0330     JSR $A86C   \ CR/LF routine which also 'hangs around' for any extra nulls that the system finds in OD ? 
+  .L0330     JSR osnewl \ $A86C   \ CR/LF routine which also 'hangs around' for any extra nulls that the system finds in OD ? 
              DEX
              BPL L0330
              LDA #$0F
@@ -151,7 +156,7 @@ ORG $239
              BRK
   .L033F     LDA #$01
   .L0341     JSR L0366
-             JSR $A357   \ line input ?
+             JSR LA357   \ line input ?
              JSR L0373
              JSR L03E0
              LDY fb
@@ -168,12 +173,14 @@ ORG $239
   .L035E     LDA #$05
   .L0360     JSR L0366
              JMP L033F
+             
   .L0366     LDY #L06D8 MOD 256    \ $06D8 seems to be start of messages
              STY f7
              LDY #L06D8 DIV 256
              STY f8
   .L036E     STA f9
              JMP L0395
+             
   .L0373     LDA #$00
   .L0375     STA f9
              LDA #L05C4 DIV 256
@@ -181,6 +188,7 @@ ORG $239
              LDA #L05C4 MOD 256		 \ $05C4: verbs start
              STA f7
              RTS
+             
   .L0380     JSR L0366
              LDA fa
              STA f9
@@ -189,6 +197,7 @@ ORG $239
              LDA #L0E3B DIV 256
              STA f8
              JMP L0395
+             
   .L0392     JSR L03A9
   .L0395     LDX #$00
              LDA (f7,X)
@@ -198,11 +207,12 @@ ORG $239
              JSR L03A9
              LDA f7
              LDY f8
-             JMP $A8C3   \ message printer?
+             JMP LA8C3   \ message printer?
   .L03A9     INC f7
              BNE L03AF
              INC f8
   .L03AF     RTS
+  
   .L03B0     LDX #$17
   .L03B2     STX f6
   .L03B4     STX fb
@@ -225,6 +235,7 @@ ORG $239
              LDX f6
              BPL L03B4
              RTS
+
   .L03E0     LDY #$00
              STY fb
   .L03E4     LDX f9
@@ -245,7 +256,7 @@ ORG $239
              RTS
   .L0400     LDA #$07
              JSR L0366
-             JSR $A357   \ line input ?
+             JSR LA357   \ line input ?
              LDA #$00
              STA f9
   .L040C     LDA #L05A0 DIV 256
@@ -461,17 +472,17 @@ INCBIN "bin1k 6d8-a44"
              JSR L0366
              PLA
              JSR L0366
-             JSR $A86C   \ CR/LF routine which also 'hangs around' for any extra nulls that the system finds in OD ? 
+             JSR osnewl \ $A86C   \ CR/LF routine which also 'hangs around' for any extra nulls that the system finds in OD ? 
              LDA #$16
              JSR L0366
-  .L0AC2     JSR $FD00   \ read keyboard ?
-             LDA m0213
+  .L0AC2     JSR LFD00   \ read keyboard ?
+             TXA \ LDA $0213
              CMP #$59
              BNE L0ACF
              JMP L0B4C
   .L0ACF     CMP #$4E
              BNE L0AC2
-             JMP $BD11   \ the existing cold-start routine from BD11 to BE38 ?
+             LDA #15:LDX #0:LDY #0:JSR osbyte:LDA #127:STA &FE4E:JMP (&FFFC) \ $BD11   \ the existing cold-start routine from BD11 to BE38 ?
              
   .L0AD6
              
@@ -504,9 +515,10 @@ INCBIN "bin2b ae0-aff"
              STY ee
              CPY #$08
              RTS
+
   .L0B2F     LDY #$0D
   .L0B31     LDA #$20
-             JSR $A8E5   \ print char ?
+             JSR oswrch \ $A8E5   \ print char ?
              DEY
              BPL L0B31
              LDA #$14
@@ -515,8 +527,8 @@ INCBIN "bin2b ae0-aff"
              STX ad
              LDX ff
              STX ae
-             JSR $B962   \ print number ?
-             JMP $A86C   \ CR/LF routine which also 'hangs around' for any extra nulls that the system finds in OD ? 
+             JSR LB962   \ print number ?
+             JMP osnewl \ $A86C   \ CR/LF routine which also 'hangs around' for any extra nulls that the system finds in OD ? 
 
   .L0B4C     LDX #$77    \ $0B4C might be the exec address? it seems to appear at the end of the original .hex file
   .L0B4E     ROL L0510,X
@@ -574,6 +586,55 @@ INCBIN "bin4b bd1-e3a"
 
 INCBIN "bin4c e3b-2000"
 
+\ Print a message
+  .LA8C3     LDY #0
+  .bA8C3     LDA (f7),Y
+             BEQ rA8C3
+             JSR oswrch
+             INY
+             JMP bA8C3
+  .rA8C3     RTS
+
+
+\ IF GET
+  .LFD00     LDA #&81
+             LDX #0
+             LDY #0
+             JSR osbyte
+             BCS LFD00
+             RTS
+
+             
+\ Line input
+  .m12       EQUB 0
+
+  .buffer
+  
+SKIP 41
+
+  .pblock    EQUB buffer MOD 256, buffer DIV 256
+             EQUB 40, 32, 122
+
+  .LA357     LDA #0
+             LDX #pblock MOD 256
+             LDY #pblock DIV 256
+             JSR osword
+             LDA #0
+             STA buffer,Y
+             RTS
+
+
+\ Print number
+  .LB962     LDA #32:JSR oswrch
+             LDA #0:STA &15:STA &2B:STA &2C:STA &2D
+             LDA ff:STA &2A
+             LDY #&40
+             JSR iascdec
+             LDX &36:LDA #0:STA &600,X
+             LDA #0:STA f7:LDA #6:STA f8
+             JMP LA8C3
+  
 .end
 
-SAVE "gh", start, end
+SAVE "gh", start, end, L0B4C
+
