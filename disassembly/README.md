@@ -2,4 +2,4 @@ I disassembled the [6502 machine code](https://github.com/ahope1/Galactic-Hitchh
 
 I then edited and reformatted the disassembled code, and the result was the file [*assembly.txt*](https://github.com/ahope1/Galactic-Hitchhiker/blob/main/disassembly/assembly.txt), which can be reassembled by [beebasm](https://github.com/stardot/beebasm) into a binary file whose contents are identical to those of the orignal hex (after adjusting for the plain-text format of the latter).
 
-The "bin..." files in this folder are binary files that are pulled in by *assembly.txt* and incorporated into the final executable binary.
+The "bin..." files in this folder are binary files that are included in *assembly.txt* and incorporated by beebasm into the final executable binary.
