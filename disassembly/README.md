@@ -4,4 +4,4 @@ I disassembled the [6502 machine code](https://github.com/ahope1/Galactic-Hitchh
 
 I then edited and reformatted the disassembled code, and the result was the file [*assembly.txt*](https://github.com/ahope1/Galactic-Hitchhiker/blob/main/disassembly/assembly.txt), which can be reassembled by [*beebasm*](https://github.com/stardot/beebasm) into a binary file whose contents are identical to those of [the orignal hex](https://github.com/ahope1/Galactic-Hitchhiker/tree/main/original-hex) (after adjusting for the plain-text format of the latter).
 
-The "bin..." files in this folder are binary files that are included in [*assembly.txt*](https://github.com/ahope1/Galactic-Hitchhiker/blob/main/disassembly/assembly.txt) and incorporated by *beebasm* into the final executable binary, which can be loaded and run by a Compukit UK101 computer (or emulator).
+The files named "bin..." in this folder are binary files that are included in [*assembly.txt*](https://github.com/ahope1/Galactic-Hitchhiker/blob/main/disassembly/assembly.txt) and incorporated by *beebasm* into the final executable binary, which can be loaded and run by a Compukit UK101 computer (or emulator).
