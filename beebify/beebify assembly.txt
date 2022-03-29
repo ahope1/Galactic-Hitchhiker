@@ -1,0 +1,579 @@
+m12 = $12
+m0213 = $0213
+ad = $AD
+ae = $AE
+e0 = $E0
+ec = $EC
+ee = $EE
+f0 = $F0
+f6 = $F6
+f7 = $F7
+f8 = $F8
+f9 = $F9
+fa = $FA
+fb = $FB
+fc = $FC
+fd = $FD
+fe = $FE
+ff = $FF
+
+ORG $239
+
+.start
+
+  .L0239     LDA L0510,X
+  .L023C     INC fd
+             ROR A
+             DEY
+             BPL L023C
+             TXA
+             BCC L029C
+             CLC
+             LDY fb
+             ADC L0588,Y
+             TAX
+             ROL L0510,X
+             BCS L0254
+             INC ff
+             SEC
+  .L0254     ROR L0510,X
+             STX fa
+             TXA
+             BEQ L026C
+             LDA #$17
+             CPX #$0A
+             BMI L026E
+             CPX #$3E
+             BPL L026C
+             LDA #$18
+             CPX #$31
+             BPL L026E
+  .L026C     LDA #$00
+  .L026E     JSR L0380
+             JSR L03B0
+             JSR L0B1B
+             BEQ L0289
+             BPL L027E
+  .L027B     JMP L033F
+  .L027E     CPY #$14
+             BPL L0295
+             PHA
+             LDA #$0F
+             JSR L0366
+             PLA
+  .L0289     LDX ee
+             ROL L0568,X
+             SEC
+             ROR L0568,X
+  .L0292     JMP L0360
+  .L0295     JSR L02BA
+             BCS L027B
+             BCC L0292
+  .L029C     JSR L0B1B
+             BPL L02B3
+             LDY ee
+             BMI L02B3
+             CPY #$05
+             BPL L02B5
+             JSR L02BE
+             BCS L02B5
+             INC fa
+             JMP L026C
+  .L02B3     LDA fa
+  .L02B5     JMP L0A6C
+             LSR fd
+  .L02BA     LSR fd
+             BCS L02C0
+  .L02BE     LSR fd
+  .L02C0     RTS
+  .L02C1     STY ec
+             STY fc
+
+             EQUB $8D \ STA for absolute addressing even though it's a zero-page address! Dunno why.
+             EQUB fa             
+             EQUB 0
+
+             JSR L02D7
+             BEQ L02D4
+             LDY ec
+             LDA fa
+             JMP L0477
+  .L02D4     JMP L035E
+  .L02D7     JSR L02F0
+             BNE L02FF
+             LDA fc
+             JSR L0375
+             JSR L0395
+             LDA #$08
+             JSR L0366
+             LDA #$00
+             STA f9
+             JSR $A357   \ line input ?
+  .L02F0     LDA #L0603 MOD 256
+             STA f7
+             LDA #L0603 DIV 256		 \ $0603: nouns start
+             STA f8
+             JSR L03E0
+             LDX fb
+             CPX #$18
+  .L02FF     RTS
+
+  .L0300     STX fa
+             LDA #L0BD1 DIV 256
+             STA f8
+             LDA #L0BD1 MOD 256    \ $0bd1 seems to be start of intro text
+             STA f7
+             JSR $A86C   \ CR/LF routine which also 'hangs around' for any extra nulls that the system finds in OD ? 
+             NOP
+             NOP
+  .L030F     JSR L0395
+             INC fa
+             LDA fa
+             CMP #$02
+             BNE L031F
+             JSR $FD00   \ read keyboard ?
+             LDX #$04
+  .L031F     JSR $A86C   \ CR/LF routine which also 'hangs around' for any extra nulls that the system finds in OD ? 
+             DEX
+             BPL L031F
+             LDA fa
+             CMP #$04
+             BNE L030F
+             JSR $FD00   \ read keyboard ?
+             LDX #$02
+  .L0330     JSR $A86C   \ CR/LF routine which also 'hangs around' for any extra nulls that the system finds in OD ? 
+             DEX
+             BPL L0330
+             LDA #$0F
+             STA fa
+             JMP L026C
+             BRK
+             BRK
+  .L033F     LDA #$01
+  .L0341     JSR L0366
+             JSR $A357   \ line input ?
+             JSR L0373
+             JSR L03E0
+             LDY fb
+             BEQ L035B
+             CPY #$10
+             BPL L035E
+
+             EQUB $AD \ LDA for absolute addressing even though it's a zero-page address! Dunno why.
+             EQUB fa
+             EQUB 0
+
+             JMP L02C1
+  .L035B     JMP L040C
+  .L035E     LDA #$05
+  .L0360     JSR L0366
+             JMP L033F
+  .L0366     LDY #L06D8 MOD 256    \ $06D8 seems to be start of messages
+             STY f7
+             LDY #L06D8 DIV 256
+             STY f8
+  .L036E     STA f9
+             JMP L0395
+  .L0373     LDA #$00
+  .L0375     STA f9
+             LDA #L05C4 DIV 256
+             STA f8
+             LDA #L05C4 MOD 256		 \ $05C4: verbs start
+             STA f7
+             RTS
+  .L0380     JSR L0366
+             LDA fa
+             STA f9
+             LDA #L0E3B MOD 256
+             STA f7
+             LDA #L0E3B DIV 256
+             STA f8
+             JMP L0395
+  .L0392     JSR L03A9
+  .L0395     LDX #$00
+             LDA (f7,X)
+             BNE L0392
+             DEC f9
+             BPL L0392
+             JSR L03A9
+             LDA f7
+             LDY f8
+             JMP $A8C3   \ message printer?
+  .L03A9     INC f7
+             BNE L03AF
+             INC f8
+  .L03AF     RTS
+  .L03B0     LDX #$17
+  .L03B2     STX f6
+  .L03B4     STX fb
+             LDA fa
+             JSR L0B00
+             BNE L03D9
+             LDA #$03
+             JSR L0366
+             LDX f6
+             CPX #$04
+             BPL L03D1
+             LDA f0,X
+             BEQ L03D1
+             LDA #$0D
+             JSR L0366
+  .L03D1     JSR L0B0E
+             LDA #$04
+             JSR L0366
+  .L03D9     DEC f6
+             LDX f6
+             BPL L03B4
+             RTS
+  .L03E0     LDY #$00
+             STY fb
+  .L03E4     LDX f9
+  .L03E6     INY
+             INX
+             LDA (f7),Y
+             BEQ L03FD
+             CMP m12,X
+             BEQ L03E6
+  .L03F0     INY
+             LDA (f7),Y
+             BNE L03F0
+             INC fb
+             LDA fb
+             CMP #$18
+             BNE L03E4
+  .L03FD     STX f9
+             RTS
+  .L0400     LDA #$07
+             JSR L0366
+             JSR $A357   \ line input ?
+             LDA #$00
+             STA f9
+  .L040C     LDA #L05A0 DIV 256
+             STA f8
+             LDA #L05A0 MOD 256    \ $05A0: directions start
+             STA f7
+             JSR L03E0
+             LDY fb
+             CPY #$07
+             BPL L0400
+             JMP L0A45
+  .L0420     CMP L0550,X
+             BEQ L0494
+             LDA #$50
+             CMP L0550,X
+             BEQ L043B
+             STX fb
+             LDA #$0B
+             JSR L0366
+             JSR L0B0E
+             LDA #$0C
+             JMP L0360
+  .L043B     LDA fa
+             CPY #$02
+             BNE L044B
+             DEC fe
+  .L0443     STA L0550,X
+  .L0446     LDA #$09
+             JMP L0341
+  .L044B     CPY #$04
+             BNE L045C
+             CPX #$12
+             BNE L0446
+             CMP #$25
+             BNE L0446
+  .L0457     INC fa
+             JMP L026C
+  .L045C     CPY #$0C
+             BNE L0472
+             CPX #$14
+             BNE L0472
+             PHA
+             LDA #$50
+             STA fa
+             JSR L03B0
+             PLA
+             STA fa
+             JMP L0446
+  .L0472     LDA #$1E
+             JMP L0360
+  .L0477     CPY #$01
+             BNE L0485
+             CPX #$15
+             BNE L0485
+             JSR L0B2F
+             JMP L0446
+  .L0485     CPY #$07
+             BNE L0420
+             CPX #$0A
+             BEQ L0490
+             JMP L035E
+  .L0490     CMP #$2D
+             BEQ L0503
+  .L0494     CPY #$01
+             BEQ L049C
+             CPY #$03
+             BNE L04B4
+  .L049C     CPX #$0B
+             BEQ L050B
+             BMI L0472
+             LDA fe
+             CMP #$04
+             BNE L04AD
+             LDA #$02
+             JMP L0360
+  .L04AD     LDA #$50
+             INC fe
+             JMP L0443
+  .L04B4     CPY #$06
+             BEQ L04C0
+             CPY #$05
+             BNE L04C7
+             CPX #$06
+             BEQ L0457
+  .L04C0     CPX #$07
+             BEQ L0457
+  .L04C4     JMP L0472
+  .L04C7     CPX #$0A
+             BPL L04C4
+             CPY #$08
+             BMI L04D6
+             LDA #$50
+             CMP L0554,Y
+             BEQ L04DB
+  .L04D6     LDA #$0A
+             JMP L0341
+  .L04DB     TYA
+             CMP L0AD6,X
+             BEQ L04E6
+             LDA #$0E
+             JMP L0360
+  .L04E6     CMP #$0B
+             BNE L04F4
+             DEC fe
+             LDA #$BA
+             STA L055F
+             STA L0550,X
+  .L04F4     CMP #$0A
+             BNE L0503
+             LDA fa
+             CMP #$20
+             BNE L0503
+             LDA #$1D
+             JMP L0AB0
+  .L0503     JMP L0A90
+             LDA #$15
+             JMP L0AB0
+  .L050B     LDA #$15
+             JMP L0AB0
+
+  .L0510
+             
+INCBIN "bin1a 510-54f"
+
+  .L0550
+
+INCBIN "bin1b 550-553"
+
+  .L0554
+
+INCBIN "bin1c 554-55e"
+
+  .L055F
+
+INCBIN "bin1d 55f-567"
+
+  .L0568
+
+INCBIN "bin1e 568-587"
+
+  .L0588
+
+INCBIN "bin1f 588-58f"
+
+  .L0590
+
+INCBIN "bin1g 590-59f"
+
+  .L05A0
+
+INCBIN "bin1h 5a0-5c3"
+
+  .L05C4
+
+INCBIN "bin1i 5c4-602"
+
+  .L0603
+
+INCBIN "bin1j 603-6d7"
+
+  .L06D8
+
+INCBIN "bin1k 6d8-a44"
+
+  .L0A45     LDX #$05
+  .L0A47     LDA L0BA0,X
+             CMP fa
+             BNE L0A57
+             LDY L0BA8,X
+             LDA L0BB0,X
+             STA L0510,Y
+  .L0A57     DEX
+             BPL L0A47
+             LDA fa
+             CMP #$2A
+             BNE L0A67
+             LDA #$0F
+             STA fa
+             JMP L026C
+  .L0A67     LDY fb
+             JMP L0BB8
+  .L0A6C     LDX #$03
+  .L0A6E     CMP L0550,X
+             BEQ L0A7B
+             DEX
+             BPL L0A6E
+  .L0A76     LDA #$06
+             JMP L0360
+  .L0A7B     LDA f0,X
+             BNE L0A76
+             DEC ff
+             BPL L0A88
+             LDA #$1F
+             JMP L0AB0
+  .L0A88     JSR L03B2
+             LDA #$0E
+             JMP L0360
+  .L0A90     LDY fa
+             LDA L0590,X
+             BPL L0A9A
+             JMP L04E6
+  .L0A9A     STA L0510,Y
+             CPX #$09
+             BNE L0AA7
+             STY L0554
+             JMP L026C
+  .L0AA7     CPX #$04
+             BPL L0AAD
+             INC f0,X
+  .L0AAD     JMP L0446
+  .L0AB0     PHA
+             LDA #$0F
+             JSR L0366
+             PLA
+             JSR L0366
+             JSR $A86C   \ CR/LF routine which also 'hangs around' for any extra nulls that the system finds in OD ? 
+             LDA #$16
+             JSR L0366
+  .L0AC2     JSR $FD00   \ read keyboard ?
+             LDA m0213
+             CMP #$59
+             BNE L0ACF
+             JMP L0B4C
+  .L0ACF     CMP #$4E
+             BNE L0AC2
+             JMP $BD11   \ the existing cold-start routine from BD11 to BE38 ?
+             
+  .L0AD6
+             
+INCBIN "bin2a ad6-adf"
+
+  .L0AE0
+
+INCBIN "bin2b ae0-aff"
+
+  .L0B00     CPX #$08
+             BMI L0B0A
+             CPX #$0B
+             BPL L0B0A
+             LDA #$99
+  .L0B0A     CMP L0550,X
+             RTS
+  .L0B0E     LDA #L0603 MOD 256    \ $0603: nouns start
+             STA f7
+             LDA #L0603 DIV 256
+             STA f8
+             LDA fb
+             JMP L036E
+  .L0B1B     LDA fa
+             LDY #$1F
+  .L0B1F     CMP L0568,Y
+             BEQ L0B27
+             DEY
+             BPL L0B1F
+  .L0B27     LDA L0AE0,Y
+             STY ee
+             CPY #$08
+             RTS
+  .L0B2F     LDY #$0D
+  .L0B31     LDA #$20
+             JSR $A8E5   \ print char ?
+             DEY
+             BPL L0B31
+             LDA #$14
+             JSR L0366
+             LDX #$00
+             STX ad
+             LDX ff
+             STX ae
+             JSR $B962   \ print number ?
+             JMP $A86C   \ CR/LF routine which also 'hangs around' for any extra nulls that the system finds in OD ? 
+
+  .L0B4C     LDX #$77    \ $0B4C might be the exec address? it seems to appear at the end of the original .hex file
+  .L0B4E     ROL L0510,X
+             CLC
+             ROR L0510,X
+             DEX
+             BPL L0B4E
+             LDX #$2B
+  .L0B5A     LDY L0B72,X
+             DEX
+             LDA L0B72,X
+             STA L0510,Y
+             DEX
+             BPL L0B5A
+             INX
+             LDY #$1F
+  .L0B6A     STX e0,Y
+             DEY
+             BPL L0B6A
+             JMP L0300
+             
+  .L0B72
+
+INCBIN "bin3a b72-b9f"
+
+  .L0BA0
+
+INCBIN "bin3b ba0-ba7"
+
+  .L0BA8
+
+INCBIN "bin3c ba8-baf"
+
+  .L0BB0
+
+INCBIN "bin3d bb0-bb7"
+
+  .L0BB8     CMP #$1C
+             BNE L0BC1
+             LDA #$13
+             JMP L0AB0
+  .L0BC1     LDX fa
+             CPY #$06
+             BNE L0BCA
+             JMP L0B4C
+  .L0BCA     JMP L0239
+
+INCBIN "bin4a bcd-bd0"
+
+  .L0BD1
+
+INCBIN "bin4b bd1-e3a"
+
+  .L0E3B
+
+INCBIN "bin4c e3b-2000"
+
+.end
+
+SAVE "gh", start, end
