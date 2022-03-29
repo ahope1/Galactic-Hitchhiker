@@ -4,3 +4,4 @@ I edited [my reconstructed assembly code](https://github.com/ahope1/Galactic-Hit
 
 Click [this link](https://github.com/ahope1/Galactic-Hitchhiker/commit/5652229d51ea682a2fcbd538a720b9c07396810b) to see the main changes. (I may  have made further changes, subsequent to those revealed by that link. See this repo's full commit history for details.) 
 
+The "bin..." files referred to in [*beebify assembly.txt*](https://github.com/ahope1/Galactic-Hitchhiker/blob/main/beebify/beebify%20assembly.txt) can be found in the [*disassembly*](https://github.com/ahope1/Galactic-Hitchhiker/tree/main/disassembly) folder.
