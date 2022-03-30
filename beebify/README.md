@@ -11,3 +11,5 @@ The file [*ght.ssd*](https://github.com/ahope1/Galactic-Hitchhiker/blob/main/bee
 The *beebasm* command that I used to generate the final disc-image ([*gh.ssd*](https://github.com/ahope1/Galactic-Hitchhiker/blob/main/beebify/gh.ssd)) was as follows: 
 
 *beebasm -v -i beebify\ assembly.txt -di ght.ssd -do gh.ssd -o gh*
+
+[**>>> Play my BBC Micro version online <<<**](http://bbcmicro.co.uk//jsbeeb/play.php?autoboot&disc=https://raw.githubusercontent.com/ahope1/Galactic-Hitchhiker/main/beebify/gh.ssd)
