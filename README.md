@@ -4,7 +4,7 @@
 
 This repository is a record of my "bare bones" conversion of A. Knight's 1980 text adventure game [Galactic Hitchhiker](https://bluerenga.blog/2021/11/04/galactic-hitchhiker-1980/) from the original version for the Compukit UK101 computer to a minimally altered version that will run on the BBC Micro computer. 
 
-Both the Compukit UK101 and the BBC Micro are built around the [6502 CPU](https://en.wikipedia.org/wiki/MOS_Technology_6502). Therefore, Galactic Hitchhiker, which has been distributed as 6502 machine code for the UK101, only needs fairly minor changes to make it run on a Beeb. All of the game logic and the game data — messages, room descriptions, etc. — are unchanged.  (But because I'd only ever *dabbled* in 6502 machine code previously — never mind disassembling and reassembling it — the conversion process was still quite challenging for me personally.)
+Both the [Compukit UK101](https://en.wikipedia.org/wiki/Compukit_UK101) and the [BBC Micro](https://en.wikipedia.org/wiki/BBC_Micro) are built around the [6502 CPU](https://en.wikipedia.org/wiki/MOS_Technology_6502). Therefore, Galactic Hitchhiker, which has been distributed as 6502 machine code for the UK101, only needs fairly minor changes to make it run on a Beeb. All of the game logic and the game data — messages, room descriptions, etc. — are unchanged.  (But because I'd only ever *dabbled* in 6502 machine code previously — never mind disassembling and reassembling it — the conversion process was still quite challenging for me personally.)
 
 ## Code
 
