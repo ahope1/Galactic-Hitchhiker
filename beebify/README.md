@@ -5,3 +5,6 @@ I edited [my reconstructed assembly code](https://github.com/ahope1/Galactic-Hit
 Click [this link](https://github.com/ahope1/Galactic-Hitchhiker/commit/5652229d51ea682a2fcbd538a720b9c07396810b) to see the main differences between the UK101 code and the BBC Micro code. (I may  have made further changes, subsequent to those revealed by that link. See this repo's full commit history for details.) 
 
 The "bin..." files that are referred to in [*beebify assembly.txt*](https://github.com/ahope1/Galactic-Hitchhiker/blob/main/beebify/beebify%20assembly.txt) can be found in the [*disassembly*](https://github.com/ahope1/Galactic-Hitchhiker/tree/main/disassembly) folder.
+
+The file *ght.ssd* is a BBC Micro disc-image that serves as a template for the final disc-image onto which *beebasm* will store the assembled game code.
+
