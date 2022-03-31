@@ -10,7 +10,7 @@ The "bin..." files that are referred to in [*beebify assembly.txt*](https://gith
 
 The file [*ght.ssd*](https://github.com/ahope1/Galactic-Hitchhiker/blob/main/beebify/ght.ssd) is a BBC Micro disc-image that serves as a template for the final disc-image on which [*beebasm*](https://github.com/stardot/beebasm) will store the assembled game code.
 
-The *beebasm* command that can be used to assemble the code and generate the final playable disc-image ([*gh.ssd*](https://github.com/ahope1/Galactic-Hitchhiker/blob/main/beebify/gh.ssd)) is as follows: 
+The *beebasm* command to assemble the code and generate the final playable disc-image ([*gh.ssd*](https://github.com/ahope1/Galactic-Hitchhiker/blob/main/beebify/gh.ssd)) is as follows: 
 
 *beebasm -v -i beebify\ assembly.txt -di ght.ssd -do gh.ssd -o gh*
 
