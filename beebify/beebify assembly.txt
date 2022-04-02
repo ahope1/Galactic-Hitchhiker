@@ -478,7 +478,7 @@ INCBIN "bin1k 6d8-a44"
              JMP L0B4C
   .L0ACF     CMP #$4E
              BNE L0AC2
-             LDA #15:LDX #0:LDY #0:JSR osbyte:LDA #127:STA &FE4E:JMP (&FFFC) \ $BD11   \ the existing cold-start routine from BD11 to BE38 ?
+             LDA #127:STA &FE4E:JMP (&FFFC) \ $BD11   \ the existing cold-start routine from BD11 to BE38 ?
              
   .L0AD6
              
