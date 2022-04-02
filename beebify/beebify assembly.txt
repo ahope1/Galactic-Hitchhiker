@@ -1,5 +1,3 @@
-ad = &E2
-ae = &E3
 e0 = &70
 ec = &7C
 ee = &7E
@@ -19,8 +17,6 @@ osnewl = &FFE7
 oswrch = &FFEE
 osword = &FFF1
 osbyte = &FFF4
-
-iascdec = &9EDF
 
 ORG $1300
 
@@ -625,15 +621,50 @@ SKIP 41
 
 
 \ Print number
+
   .LB962     LDA #32:JSR oswrch
-             LDA #0:STA &15:STA &2B:STA &2C:STA &2D
-             LDA ff:STA &2A
-             LDY #&40
-             JSR iascdec
-             LDX &36:LDA #0:STA &600,X
-             LDA #0:STA f7:LDA #6:STA f8
-             JMP LA8C3
+
+             SED  \ Switch to decimal mode
+             LDA #0  \ Ensure the result is clear
+             STA bcd+0
+             STA bcd+1
+             LDX #8  \ The number of source bits
+
+  .cnvbit    ASL ae  \ Shift out one bit
+             LDA bcd+0  \ And add into result
+             ADC bcd+0
+             STA bcd+0
+             LDA bcd+1  \ propagating any carry
+             ADC bcd+1
+             STA bcd+1
+             DEX  \ And repeat for next bit
+             BNE cnvbit
+             CLD  \ Back to binary
+
+             LDA bcd+1
+             BEQ skip1
+             ADC zero
+             JSR oswrch
+  .skip1     LDA bcd
+             AND #&F0
+             ROR A:ROR A:ROR A:ROR A
+             BNE skip2
+             LDA bcd+1
+             BEQ skip3
+             LDA #0
+  .skip2     ADC zero
+             JSR oswrch
+  .skip3     LDA bcd
+             AND #&F
+             ADC zero
+             JMP oswrch
+
+  .zero      EQUB 48
+  .ae        EQUB 0
+  .bcd       EQUB 0,0
   
+  .ad        EQUB 0 \ dummy
+
 .end
 
 SAVE "gh", start, end, L0B4C
