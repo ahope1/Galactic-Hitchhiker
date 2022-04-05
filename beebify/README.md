@@ -4,7 +4,7 @@ I edited [my reconstructed assembly code](https://github.com/ahope1/Galactic-Hit
 
 Click [this link](https://github.com/ahope1/Galactic-Hitchhiker/commit/5652229d51ea682a2fcbd538a720b9c07396810b) to see the main differences between the UK101 code and the BBC Micro code. (By now, I may have made further changes, subsequent to those revealed by that link. See [the full commit history](https://github.com/ahope1/Galactic-Hitchhiker/commits/main/beebify/beebify%20assembly.txt) for details.) Essentially, I've just searched for any "API calls" to the UK101 BASIC ROM and replaced them with shims, a bit of custom assembler, and calls to the equivalent routines in the BBC Micro OS. 
 
-**I haven't fully analysed or commented the game logic or the encoding of the game data yet.**
+**I haven't fully analysed or commented the game-logic or the encoding of the game-data yet.**
 
 The "bin..." files that are referred to in [*beebify assembly.txt*](https://github.com/ahope1/Galactic-Hitchhiker/blob/main/beebify/beebify%20assembly.txt) can be found in the [*disassembly*](https://github.com/ahope1/Galactic-Hitchhiker/tree/main/disassembly) folder.
 
