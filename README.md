@@ -6,7 +6,7 @@ This repo is a record of my "bare bones" conversion of A. Knight's 1980 text adv
 
 Both the [Compukit UK101](https://en.wikipedia.org/wiki/Compukit_UK101) and the [BBC Micro](https://en.wikipedia.org/wiki/BBC_Micro) are computers that are built around the [6502 CPU](https://en.wikipedia.org/wiki/MOS_Technology_6502), and because Galactic Hitchhiker was distributed as 6502 machine code for the UK101, it only needed fairly minor changes to make it run on the Beeb. All of the game logic and the game data (messages, room descriptions, etc.) have been left unchanged.
 
-(Still, because I'd only ever *dabbled* in 6502 machine code programming before now — never mind disassembly and reassembly — I personally found that the task of [converting](https://github.com/ahope1/Galactic-Hitchhiker/tree/main/beebify) the game was non-trivial.)
+(But because I'd only ever *dabbled* in 6502 machine code programming before now — never mind disassembly and reassembly — I still found that the task of [converting](https://github.com/ahope1/Galactic-Hitchhiker/tree/main/beebify) the game was non-trivial.)
 
 Read [my blogpost](https://ahopeful.wordpress.com/2022/04/09/galactic-hitchhiker-1980-inspo-a-go-go/) about Galactic Hitchhiker. 
 
