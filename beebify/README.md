@@ -8,11 +8,11 @@ Click [this link](https://github.com/ahope1/Galactic-Hitchhiker/commit/5652229d5
 
 **I haven't fully analysed or commented the game-logic or the encoding of the game-data yet.**
 
-The "bin..." files that are referred to in [*beebify assembly.txt*](https://github.com/ahope1/Galactic-Hitchhiker/blob/main/beebify/beebify%20assembly.txt) can be found in the [*disassembly*](https://github.com/ahope1/Galactic-Hitchhiker/tree/main/disassembly) folder.
+The "bin..." files (which are referred to in [*beebify assembly.txt*](https://github.com/ahope1/Galactic-Hitchhiker/blob/main/beebify/beebify%20assembly.txt)) can be found in the [*disassembly*](https://github.com/ahope1/Galactic-Hitchhiker/tree/main/disassembly) folder.
 
 The file [*ght.ssd*](https://github.com/ahope1/Galactic-Hitchhiker/blob/main/beebify/ght.ssd) is a BBC Micro disc-image that serves as a template for the final disc-image on which [*beebasm*](https://github.com/stardot/beebasm) will store the assembled game code.
 
-The *beebasm* command to assemble the code and generate the final playable disc-image ([*gh.ssd*](https://github.com/ahope1/Galactic-Hitchhiker/blob/main/beebify/gh.ssd)) is as follows: 
+Here's the *beebasm* command that will assemble the code and generate the final playable disc-image ([*gh.ssd*](https://github.com/ahope1/Galactic-Hitchhiker/blob/main/beebify/gh.ssd)): 
 
 *beebasm -v -i beebify\ assembly.txt -di ght.ssd -do gh.ssd -o gh*
 
