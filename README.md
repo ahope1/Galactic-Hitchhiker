@@ -8,7 +8,7 @@ Both the [Compukit UK101](https://en.wikipedia.org/wiki/Compukit_UK101) and the 
 
 (But because I'd only ever *dabbled* in 6502 machine code programming before now — never mind disassembly and reassembly — I still found that the task of [converting](https://github.com/ahope1/Galactic-Hitchhiker/tree/main/beebify) the game was non-trivial.)
 
-Read [my blogpost](https://ahopeful.wordpress.com/2022/04/09/galactic-hitchhiker-1980-inspo-a-go-go/) about Galactic Hitchhiker. 
+See [my blogpost](https://ahopeful.wordpress.com/2022/04/09/galactic-hitchhiker-1980-inspo-a-go-go/) about Galactic Hitchhiker. 
 
 ## Code
 
