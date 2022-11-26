@@ -2,7 +2,7 @@
 
 [**>>> Play my BBC Micro version online <<<**](http://bbcmicro.co.uk//jsbeeb/play.php?autoboot&disc=https://raw.githubusercontent.com/ahope1/Galactic-Hitchhiker/main/beebify/gh.ssd)
 
-This repo is a record of my "bare bones" conversion of A. Knight's 1980 text adventure game [Galactic Hitchhiker](https://ahopeful.wordpress.com/2022/04/09/galactic-hitchhiker-1980-inspo-a-go-go/). I took the original version, for the Compukit UK101, and modified it slightly so that it would run on a BBC Micro. 
+This repo contains my "bare bones" conversion of A. Knight's 1980 text adventure game [Galactic Hitchhiker](https://ahopeful.wordpress.com/2022/04/09/galactic-hitchhiker-1980-inspo-a-go-go/). I took the original version, for the Compukit UK101, and modified it slightly so that it would run on a BBC Micro. 
 
 Both the [Compukit UK101](https://en.wikipedia.org/wiki/Compukit_UK101) and the [BBC Micro](https://en.wikipedia.org/wiki/BBC_Micro) are computers that were built around the [6502 CPU](https://en.wikipedia.org/wiki/MOS_Technology_6502). Because Galactic Hitchhiker was distributed as 6502 machine code for the UK101, I only needed to make fairly minor changes to get it running on the Beeb. All of the game logic and the game data (messages, room descriptions, etc.) have been left unchanged.
 
