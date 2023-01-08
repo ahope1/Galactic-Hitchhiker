@@ -1,6 +1,6 @@
 # Conversion to the BBC Micro
 
-I edited [my reconstructed assembly code](https://github.com/ahope1/Galactic-Hitchhiker/tree/main/disassembly) for the Compukit UK101 version of the game Galactic Hitchhiker, and I adapted it into a version ([*beebify assembly.txt*](https://github.com/ahope1/Galactic-Hitchhiker/blob/main/beebify/beebify%20assembly.txt)) which, once assembled by [*beebasm*](https://github.com/stardot/beebasm), will run on a BBC Micro. 
+I edited [my reconstructed assembly code](https://github.com/ahope1/Galactic-Hitchhiker/tree/main/disassembly) for the Compukit UK101 game Galactic Hitchhiker in order to adapt it into a version ([*beebify assembly.txt*](https://github.com/ahope1/Galactic-Hitchhiker/blob/main/beebify/beebify%20assembly.txt)) which, once assembled by [*beebasm*](https://github.com/stardot/beebasm), would run on a BBC Micro. 
 
 Large chunks of the assembly code are unchanged because they were already compatible with both the UK101 and the BBC Micro. 
 
