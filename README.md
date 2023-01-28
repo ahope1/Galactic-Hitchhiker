@@ -2,7 +2,7 @@
 
 [**>>> Play my BBC Micro version online <<<**](http://bbcmicro.co.uk//jsbeeb/play.php?autoboot&disc=https://raw.githubusercontent.com/ahope1/Galactic-Hitchhiker/main/beebify/gh.ssd)
 
-This repo contains my "bare bones" conversion of A. Knight's 1980 text adventure game [Galactic Hitchhiker](https://ahopeful.wordpress.com/2022/04/09/galactic-hitchhiker-1980-inspo-a-go-go/). I took the original game, which was made for the Compukit UK101, and modified it slightly so that it would run on a BBC Micro. 
+This repo contains my "bare bones" conversion of A. Knight's 1980 text adventure game [Galactic Hitchhiker](https://ahopeful.wordpress.com/2022/04/09/galactic-hitchhiker-1980-inspo-a-go-go/): I took the original game, which was made for the Compukit UK101, and modified it slightly so that it would run on a BBC Micro. 
 
 See [my blogpost](https://ahopeful.wordpress.com/2022/04/09/galactic-hitchhiker-1980-inspo-a-go-go/) about Galactic Hitchhiker. 
 
